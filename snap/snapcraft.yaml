@@ -5,7 +5,7 @@ description: |
   rustdesk
 
 base: core18
-confinement: strict
+confinement: classic
 grade: stable
 
 plugs:
