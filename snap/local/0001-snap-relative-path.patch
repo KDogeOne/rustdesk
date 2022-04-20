@@ -1,0 +1,27 @@
+diff --git a/libs/enigo/src/linux.rs b/libs/enigo/src/linux.rs
+index 456c207..fd86610 100644
+--- a/libs/enigo/src/linux.rs
++++ b/libs/enigo/src/linux.rs
+@@ -487,7 +487,7 @@ static IPC_FILE: &'static str = "/tmp/RustDesk/pynput_service";
+ fn start_pynput_service(rx: mpsc::Receiver<(PyMsg, bool)>) {
+     let mut py = "./pynput_service.py".to_owned();
+     if !std::path::Path::new(&py).exists() {
+-        py = "/usr/share/rustdesk/files/pynput_service.py".to_owned();
++        py = std::env::var("SNAP").unwrap() + "/usr/share/rustdesk/files/pynput_service.py";
+         if !std::path::Path::new(&py).exists() {
+             log::error!("{} not exits", py);
+         }
+diff --git a/src/ui.rs b/src/ui.rs
+index 0afb761..c2e4a23 100644
+--- a/src/ui.rs
++++ b/src/ui.rs
+@@ -39,7 +39,8 @@ struct UIHostHandler;
+ 
+ pub fn start(args: &mut [String]) {
+     #[cfg(all(target_os = "linux", feature = "inline"))]
+-    sciter::set_library("/usr/lib/rustdesk/libsciter-gtk.so").ok();
++    let libsciter_location = std::env::var("SNAP").unwrap() + "/usr/lib/rustdesk/libsciter-gtk.so";
++    sciter::set_library(libsciter_location.as_str()).ok();
+     // https://github.com/c-smile/sciter-sdk/blob/master/include/sciter-x-types.h
+     // https://github.com/rustdesk/rustdesk/issues/132#issuecomment-886069737
+     #[cfg(windows)]

@@ -58,6 +58,7 @@ parts:
     override-pull: |
       snapcraftctl pull
       python3 inline-sciter.py
+      git apply ./snap/local/0001-snap-relative-path.patch
     rust-features:
       - inline
     build-packages:
