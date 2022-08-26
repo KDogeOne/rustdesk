@@ -80,6 +80,8 @@ class DesktopTabController {
     if (index < 0 || index > len - 1) return;
     final key = state.value.tabs[index].key;
     final currentSelected = state.value.selected;
+    debugPrint(
+        "* remove $index - ${state.value.tabs[index].label}, currentSelected: $currentSelected, tabs.len: ${state.value.tabs.length}");
     int toIndex = 0;
     if (index == len - 1) {
       toIndex = max(0, currentSelected - 1);
@@ -90,6 +92,7 @@ class DesktopTabController {
     state.value.scrollController.itemCount = state.value.tabs.length;
     jumpTo(toIndex);
     onRemove?.call(index, key);
+    debugPrint("* remove end tabs.len: ${state.value.tabs.length}");
   }
 
   void jumpTo(int index) {
