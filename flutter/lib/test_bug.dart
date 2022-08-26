@@ -38,8 +38,14 @@ class TabTestState extends State<TabTest> {
   @override
   void initState() {
     initData.forEach((e) {
-      tabController.state.value.tabs.add(
-          TabInfo(key: e, label: "Tab " + e, closable: true, page: Page(e)));
+      tabController.state.value.tabs.add(TabInfo(
+          key: e,
+          label: "Tab " + e,
+          closable: true,
+          page: Page(
+            e,
+            key: ValueKey(e),
+          )));
     });
     super.initState();
   }
@@ -56,8 +62,13 @@ class TabTestState extends State<TabTest> {
             theme: theme,
             onTap: () {
               final newTab = "Add" + addCount.toString();
-              tabController
-                  .add(TabInfo(key: newTab, label: newTab, page: Page(newTab)));
+              tabController.add(TabInfo(
+                  key: newTab,
+                  label: newTab,
+                  page: Page(
+                    newTab,
+                    key: ValueKey(newTab),
+                  )));
             },
             is_close: false,
             icon: IconFont.add,
@@ -69,7 +80,9 @@ class TabTestState extends State<TabTest> {
 
 class Page extends StatefulWidget {
   final String text;
-  Page(this.text);
+  final Key? key;
+
+  Page(this.text, {this.key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
