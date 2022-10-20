@@ -86,10 +86,10 @@ jobs:
         run: ./build.py --flutter
 
       - name: Update nightly release
-        uses: eine/tip@master
+        uses: pyTooling/Actions/releaser@r0
         with:
           tag: nightly
           rm: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          files:
-            - rustdesk-*.deb
+          files: |
+            rustdesk-*.deb
