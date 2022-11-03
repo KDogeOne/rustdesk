@@ -16,9 +16,7 @@ use hbb_common::{
     sodiumoxide::crypto::{box_, secretbox, sign},
     timeout, tokio, ResultType, Stream,
 };
-#[cfg(not(any(target_os = "android", target_os = "ios")))]
-use service::ServiceTmpl;
-use service::{GenericService, Service, Subscriber};
+pub use service::{GenericService, Service, ServiceTmpl, Subscriber};
 use std::{
     collections::HashMap,
     net::SocketAddr,
@@ -63,6 +61,13 @@ type ConnMap = HashMap<i32, ConnInner>;
 lazy_static::lazy_static! {
     pub static ref CHILD_PROCESS: Childs = Default::default();
     pub static ref CONN_COUNT: Arc<Mutex<usize>> = Default::default();
+    // A client server used to provide local services(audio, video, clipboard, etc.) 
+    // for all initiative connections.
+    //
+    // [Note]
+    // Now we use this [`CLIENT_SERVER`] to do following operations:
+    // - record local audio, and send to remote
+    pub static ref CLIENT_SERVER: ServerPtr = new();
 }
 
 pub struct Server {
@@ -313,6 +318,13 @@ impl Server {
                 s.on_unsubscribe(conn.id());
             }
         }
+    }
+
+    // get a new unique id
+    pub fn get_new_id(&mut self) -> i32 {
+        let new_id = self.id_count;
+        self.id_count += 1;
+        new_id
     }
 }
 
