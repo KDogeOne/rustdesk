@@ -200,7 +200,7 @@ jobs:
       fail-fast: false
       matrix:
         job:
-          # - { arch: armv7, os: ubuntu-20.04 }
+          - { arch: armv7, os: ubuntu-20.04 }
           - { arch: x86_64, os: ubuntu-20.04 }
           - { arch: aarch64, os: ubuntu-20.04 }
     steps:
@@ -533,13 +533,13 @@ jobs:
               extra-build-features: "",
             }
           # - { arch: aarch64, target: aarch64-unknown-linux-gnu   , os: ubuntu-20.04, use-cross: true, extra-build-features: "flatpak" }
-          # - {
-          #     arch: armv7,
-          #     target: arm-unknown-linux-gnueabihf,
-          #     os: ubuntu-20.04,
-          #     use-cross: true,
-          #     extra-build-features: "",
-          #   }
+          - {
+              arch: armv7,
+              target: arm-unknown-linux-gnueabihf,
+              os: ubuntu-20.04,
+              use-cross: true,
+              extra-build-features: "",
+            }
           # - { arch: armv7, target: arm-unknown-linux-gnueabihf , os: ubuntu-20.04, use-cross: true, extra-build-features: "flatpak" }
           # - { target: arm-unknown-linux-musleabihf, os: ubuntu-20.04, use-cross: true }
     steps:
@@ -718,7 +718,7 @@ jobs:
           #     use-cross: true,
           #     extra-build-features: "flatpak",
           #   }
-          # - { arch: armv7, target: arm-unknown-linux-gnueabihf , os: ubuntu-20.04, use-cross: true, extra-build-features: "" }
+          - { arch: armv7, target: arm-unknown-linux-gnueabihf , os: ubuntu-20.04, use-cross: true, extra-build-features: "" }
           # - { arch: armv7, target: arm-unknown-linux-gnueabihf , os: ubuntu-20.04, use-cross: true, extra-build-features: "flatpak" }
           # - { target: arm-unknown-linux-musleabihf, os: ubuntu-20.04, use-cross: true }
     steps:
