@@ -748,7 +748,16 @@ jobs:
         run: |
           pushd /opt
           # Currently 3.0.5 does not support arm build
-          git clone https://github.com/flutter/flutter.git -b stable || true
+          case ${{ matrix.job.arch }} in
+            aarch64)
+              git clone https://github.com/flutter/flutter.git -b stable || true
+            ;;
+            armv7)
+              # try use master branch
+              git clone https://github.com/flutter/flutter.git || true
+            ;;
+          esac
+         
           pushd flutter
           git fetch origin && git reset --hard origin/stable
           # TODO: `flutter_improved_scrolling` needs to be revised to support arm64 trackpad.
@@ -772,6 +781,8 @@ jobs:
             apt update -y
             apt-get -qq install -y git cmake g++ gcc build-essential nasm yasm curl unzip xz-utils python3 wget pkg-config ninja-build pkg-config libgtk-3-dev liblzma-dev clang libappindicator3-dev rpm
           run: |
+            # output arch
+            uname -a
             # disable git safe.directory
             git config --global --add safe.directory "*"
             # Setup Flutter
