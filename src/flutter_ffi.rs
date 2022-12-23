@@ -487,6 +487,13 @@ pub fn main_get_error() -> String {
     get_error()
 }
 
+pub fn main_set_grab_x11_window(xid: u64) {
+    #[cfg(target_os = "linux")] 
+    {
+        rdev::set_grab_window(Some(xid as _));
+    }
+}
+
 pub fn main_set_option(key: String, value: String) {
     if key.eq("custom-rendezvous-server") {
         set_option(key, value);
