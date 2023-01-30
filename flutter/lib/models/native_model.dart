@@ -112,8 +112,12 @@ class PlatformFFI {
       }
       _ffiBind = RustdeskImpl(dylib);
       if (Platform.isLinux) {
-        // start dbus service, no need to await
-        await _ffiBind.mainStartDbusServer();
+        Future.wait([
+          // Start dbus service.
+          _ffiBind.mainStartDbusServer(),
+          // Start local audio pulseaudio server.
+          _ffiBind.mainStartPa()
+        ]);
       }
       _startListenEvent(_ffiBind); // global event
       try {
