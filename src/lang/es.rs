@@ -438,7 +438,7 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Please confirm if you want to share your desktop?", "Por favor, confirma si quieres compartir tu escritorio"),
         ("Closed as expected", ""),
         ("Guest to Host", ""),
-        ("Two way", ""),
+        ("Dual way", ""),
         ("Audio Transmission Mode", ""),
     ].iter().cloned().collect();
 }

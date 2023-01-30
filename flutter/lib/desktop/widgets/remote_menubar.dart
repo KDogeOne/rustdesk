@@ -950,8 +950,8 @@ class _RemoteMenubarState extends State<RemoteMenubar> {
             dismissOnClicked: true,
           ),
           MenuEntryRadioOption(
-            text: translate('Two way'),
-            value: kRemoteAudioTwoWay,
+            text: translate('Dual way'),
+            value: kRemoteAudioDualWay,
             dismissOnClicked: true,
           ),
         ],
