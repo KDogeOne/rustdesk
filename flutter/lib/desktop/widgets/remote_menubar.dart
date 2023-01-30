@@ -965,6 +965,7 @@ class _RemoteMenubarState extends State<RemoteMenubar> {
         },
         padding: padding,
       ),
+      MenuEntryDivider<String>(),
     ];
 
     if (widget.state.viewStyle.value == kRemoteViewStyleOriginal) {
