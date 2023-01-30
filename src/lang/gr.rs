@@ -41,10 +41,10 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("About", "Πληροφορίες"),
         ("Slogan_tip", ""),
         ("Privacy Statement", ""),
+        ("Mute", "Σίγαση"),
         ("Build Date", ""),
         ("Version", ""),
         ("Home", ""),
-        ("Mute", "Σίγαση"),
         ("Audio Input", "Είσοδος ήχου"),
         ("Enhancements", "Βελτιώσεις"),
         ("Hardware Codec", "Κωδικοποιητής υλικού"),
@@ -437,5 +437,8 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Switch Sides", ""),
         ("Please confirm if you want to share your desktop?", ""),
         ("Closed as expected", ""),
+        ("Guest to Host", ""),
+        ("Two way", ""),
+        ("Audio Transmission Mode", ""),
     ].iter().cloned().collect();
 }

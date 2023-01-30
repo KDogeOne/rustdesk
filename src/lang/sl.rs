@@ -41,10 +41,10 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("About", "O programu"),
         ("Slogan_tip", ""),
         ("Privacy Statement", ""),
+        ("Mute", "Izklopi zvok"),
         ("Build Date", ""),
         ("Version", ""),
         ("Home", ""),
-        ("Mute", "Izklopi zvok"),
         ("Audio Input", "Avdio vhod"),
         ("Enhancements", "Izboljšave"),
         ("Hardware Codec", "Strojni kodek"),
@@ -437,5 +437,8 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Switch Sides", ""),
         ("Please confirm if you want to share your desktop?", ""),
         ("Closed as expected", ""),
+        ("Guest to Host", ""),
+        ("Two way", ""),
+        ("Audio Transmission Mode", ""),
     ].iter().cloned().collect();
 }

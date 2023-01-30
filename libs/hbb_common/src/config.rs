@@ -192,6 +192,11 @@ pub struct PeerConfig {
         deserialize_with = "PeerConfig::deserialize_image_quality"
     )]
     pub image_quality: String,
+    #[serde(
+        default = "PeerConfig::default_audio_mode",
+        deserialize_with = "PeerConfig::deserialize_audio_mode"
+    )]
+    pub audio_mode: String,
     #[serde(default)]
     pub custom_image_quality: Vec<i32>,
     #[serde(default)]
@@ -972,6 +977,11 @@ impl PeerConfig {
         default_image_quality,
         deserialize_image_quality,
         "balanced".to_owned()
+    );
+    serde_field_string!(
+        default_audio_mode,
+        deserialize_audio_mode,
+        "guest-to-host".to_owned()
     );
 
     fn deserialize_options<'de, D>(deserializer: D) -> Result<HashMap<String, String>, D::Error>

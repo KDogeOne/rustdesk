@@ -437,5 +437,8 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Switch Sides", "反转访问方向"),
         ("Please confirm if you want to share your desktop?", "请确认要让对方访问你的桌面?"),
         ("Closed as expected", "正常关闭"),
+        ("Guest to Host", "被控到主机"),
+        ("Two way", "双向"),
+        ("Audio Transmission Mode", "音频传输模式"),
     ].iter().cloned().collect();
 }

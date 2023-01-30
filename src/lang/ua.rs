@@ -41,10 +41,10 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("About", "Про RustDesk"),
         ("Slogan_tip", "Створено з душею в цьому хаотичному світі!"),
         ("Privacy Statement", "Декларація про конфіденційність"),
+        ("Mute", "Вимкнути звук"),
         ("Build Date", ""),
         ("Version", ""),
         ("Home", ""),
-        ("Mute", "Вимкнути звук"),
         ("Audio Input", "Аудіовхід"),
         ("Enhancements", "Покращення"),
         ("Hardware Codec", "Апаратний кодек"),
@@ -437,5 +437,8 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Switch Sides", ""),
         ("Please confirm if you want to share your desktop?", ""),
         ("Closed as expected", ""),
+        ("Guest to Host", ""),
+        ("Two way", ""),
+        ("Audio Transmission Mode", ""),
     ].iter().cloned().collect();
 }
