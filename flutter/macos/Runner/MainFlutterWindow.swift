@@ -1,4 +1,5 @@
 import Cocoa
+import AVFoundation
 import FlutterMacOS
 import desktop_multi_window
 // import bitsdojo_window_macos
@@ -27,11 +28,13 @@ class MainFlutterWindow: NSWindow {
         let windowFrame = self.frame
         self.contentViewController = flutterViewController
         self.setFrame(windowFrame, display: true)
+        self.registerPermissionHandler(messenger: flutterViewController.engine.binaryMessenger)
         
         RegisterGeneratedPlugins(registry: flutterViewController)
 
         FlutterMultiWindowPlugin.setOnWindowCreatedCallback { controller in
             // Register the plugin which you want access from other isolate.
+            self.registerPermissionHandler(messenger: controller.engine.binaryMessenger)
             // DesktopLifecyclePlugin.register(with: controller.registrar(forPlugin: "DesktopLifecyclePlugin"))
             DesktopDropPlugin.register(with: controller.registrar(forPlugin: "DesktopDropPlugin"))
             DeviceInfoPlusMacosPlugin.register(with: controller.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
@@ -52,5 +55,33 @@ class MainFlutterWindow: NSWindow {
     override public func order(_ place: NSWindow.OrderingMode, relativeTo otherWin: Int) {
         super.order(place, relativeTo: otherWin)
         hiddenWindowAtLaunch()
+    }
+    
+    public func registerPermissionHandler(messenger: FlutterBinaryMessenger) {
+        let channel = FlutterMethodChannel(name: "org.rustdesk.rustdesk/perm", binaryMessenger: messenger)
+        channel.setMethodCallHandler { (call, result) -> Void in
+            switch call.method {
+            case "canRecordAudio":
+                switch AVCaptureDevice.authorizationStatus(for: .audio) {
+                case .authorized:
+                    result(1)
+                    break
+                case .notDetermined:
+                    result(0)
+                    break
+                default:
+                    result(-1)
+                    break
+                }
+            case "requestRecordAudio":
+                AVCaptureDevice.requestAccess(for: .audio, completionHandler: { granted in
+                    result(granted)
+                })
+                break
+            default:
+                result(FlutterMethodNotImplemented)
+            }
+        }
+        
     }
 }
