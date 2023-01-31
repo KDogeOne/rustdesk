@@ -1651,7 +1651,6 @@ enum PermissionAuthorizeType {
 
 Future<PermissionAuthorizeType> osxCanRecordAudio() async {
   int res = await kMacOSPermChannel.invokeMethod("canRecordAudio");
-  print(res);
   if (res > 0) {
     return PermissionAuthorizeType.authorized;
   } else if (res == 0) {
@@ -1662,5 +1661,15 @@ Future<PermissionAuthorizeType> osxCanRecordAudio() async {
 }
 
 Future<bool> osxRequestAudio() async {
-  return await kMacOSPermChannel.invokeMethod("requestRecordAudio");
+  int res = await kMacOSPermChannel.invokeMethod("canRecordAudio");
+  if (res < 0) {
+    await osxOpenSystemSetting();
+    return false;
+  } else {
+    return await kMacOSPermChannel.invokeMethod("requestRecordAudio");
+  }
+}
+
+Future<void> osxOpenSystemSetting() async {
+  await kMacOSPermChannel.invokeMethod("openSystemPrivacySetting");
 }
